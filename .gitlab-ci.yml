@@ -1,0 +1,49 @@
+stages:
+  - prebuild
+  - test
+  - build
+  - deploy
+
+prebuild:ccmobile:
+  stage: prebuild
+  tags:
+    - shell
+  script:
+    - flutter channel master
+    - flutter upgrade
+    - flutter analyze
+    - ./scripts/formatting_check.sh
+
+test:ccmobile:
+  stage: test
+  tags:
+    - shell
+  script:
+    - flutter test
+
+build:android:
+  stage: build
+  artifacts:
+    untracked: true
+  tags:
+    - shell
+  script:
+    - flutter build apk
+
+build:ios:
+  stage: build
+  tags:
+    - shell
+  script:
+    - flutter build ios
+
+deploy:android:
+  only:
+    - tags
+  stage: deploy
+  dependencies:
+    - build:android
+  tags:
+    - shell
+  script:
+    - ./scripts/deploy.sh

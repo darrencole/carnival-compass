@@ -1,0 +1,17 @@
+.DS_Store
+.atom/
+.idea
+.packages
+.pub/
+.gradle/
+build/
+ios/.generated/
+ios/Podfile.lock
+ios/Flutter/flutter_assets/
+packages
+pubspec.lock
+.flutter-plugins
+scripts/deploy/src/main/resources/app-release.apk
+key.properties
+google-services.json
+GoogleService-Info.plist
